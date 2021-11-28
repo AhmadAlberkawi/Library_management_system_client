@@ -1,0 +1,34 @@
+<div class="main-nav">
+  <a href="index.html"> <img src="https://i.imgur.com/2BrRGoF.png" class="imgleft" alt="logo" /></a>
+  <h5 class="title-header">University Library<br> Management System</h5>
+  <div class="dropdown">
+    <a class="dropdown-toggle text-light">Wilkommen {{userLastName}}</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item">Profile bearbeiten</a>
+      <a class="dropdown-item">Abmelden</a>
+    </div>
+  </div>
+</div>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <div style="margin-left:35%">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Überblick</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Studenten</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Bücher</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Ausleihe</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" *ngIf="superAdmin">Admins</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
