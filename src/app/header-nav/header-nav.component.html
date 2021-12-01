@@ -1,11 +1,12 @@
 <div class="main-nav">
   <a href="index.html"> <img src="https://i.imgur.com/2BrRGoF.png" class="imgleft" alt="logo" /></a>
   <h5 class="title-header">University Library<br> Management System</h5>
-  <div class="dropdown">
-    <a class="dropdown-toggle text-light">Wilkommen {{userLastName}}</a>
-    <div class="dropdown-menu">
-      <a class="dropdown-item">Profile bearbeiten</a>
-      <a class="dropdown-item">Abmelden</a>
+  <div class="dropdown" dropdown>
+    <a class="dropdown-toggle text-light" dropdownToggle>Wilkommen {{userLastName}}</a>
+    <div class="dropdown-menu mt-3" *dropdownMenu>
+      <a class="dropdown-item">Profil bearbeiten</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" (click)="logout()">Abmelden</a>
     </div>
   </div>
 </div>

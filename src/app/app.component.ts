@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from './_services/account.service';
+import { Admin } from './_models/admin';
+import { AdminService } from './_services/admin.service';
 
 @Component({
   selector: 'app-root',
@@ -12,20 +12,29 @@ export class AppComponent implements OnInit {
 
   title = '';
 
-  loggedIn: boolean;
+  
 
   model: any = {};
 
-  constructor(private accountSerive: AccountService) { }
+  constructor(private adminservice: AdminService) { }
 
   ngOnInit(): void {
-    
+    this.setCurrentAdmin();
   }
 
+  setCurrentAdmin() {
+    const admin: Admin = JSON.parse(localStorage.getItem('admin'));
+    if (admin) {
+      this.adminservice.setCurrentAdmin(admin);
+    }
+  }
+
+
+
   login() {
-    this.accountSerive.login(this.model).subscribe(Response => {
+    this.adminservice.login(this.model).subscribe(Response => {
       console.log(Response);
-      this.loggedIn = true;
+      this.adminservice.loggedIn = true;
     },
       error => {
         console.log(error);
@@ -33,9 +42,16 @@ export class AppComponent implements OnInit {
     )
   }
 
-  logout() {
-    this.loggedIn = false;
-  }
+
+
+
+
+
+
+
+  //logout() {
+  //  this.loggedIn = false;
+  //}
 
 }
 
