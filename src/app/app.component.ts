@@ -12,11 +12,9 @@ export class AppComponent implements OnInit {
 
   title = '';
 
-  
-
   model: any = {};
 
-  constructor(private adminservice: AdminService) { }
+  constructor(public adminservice: AdminService) { }
 
   ngOnInit(): void {
     this.setCurrentAdmin();
@@ -29,30 +27,16 @@ export class AppComponent implements OnInit {
     }
   }
 
-
-
   login() {
     this.adminservice.login(this.model).subscribe(Response => {
       console.log(Response);
-      this.adminservice.loggedIn = true;
+      this.adminservice.logedIn = true;
     },
       error => {
         console.log(error);
       }
     )
   }
-
-
-
-
-
-
-
-
-  //logout() {
-  //  this.loggedIn = false;
-  //}
-
 }
 
 

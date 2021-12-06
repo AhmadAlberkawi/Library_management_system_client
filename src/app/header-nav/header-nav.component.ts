@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Admin } from '../_models/admin';
 import { AdminService } from '../_services/admin.service';
 
@@ -11,35 +12,22 @@ export class HeaderNavComponent implements OnInit {
 
   userLastName = 'Ahmad';
 
-  loggedIn: boolean;
+  currentAdmin$: Observable<Admin>;
 
   superAdmin: boolean = true;
 
-  constructor(private adminservice: AdminService) { }
+  constructor(public adminservice: AdminService) { }
 
   ngOnInit(): void {
-    this.getCurrentAdmin();
-    if (!this.adminservice.loggedIn) {
+    this.currentAdmin$ = this.adminservice.currentAdmin$;
 
+    if (!this.currentAdmin$) {
+      // navigieren zu der ersten website
     }
   }
 
-
-
-
-
   logout() {
     this.adminservice.logout();
-    this.adminservice.loggedIn = false;
+    this.adminservice.logedIn = false;
   }
-
-
-  getCurrentAdmin() {
-    this.adminservice.currentAdmin$.subscribe(admin => {
-      this.adminservice.loggedIn = !!admin;
-    }, error => {
-      console.log(error)
-    });
-  }
-
 }

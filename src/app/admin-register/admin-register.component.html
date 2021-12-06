@@ -1,0 +1,39 @@
+<form class="container" #registerForm="ngForm" (ngSubmit)="adminRegister()" autocomplete="off">
+  <h2 class="text-center text-primary">Regestrieren</h2>
+  <hr>
+  <div class="form-group">
+    <input type="text" class="form-control" name="username"
+           [(ngModel)]="model.username" placeholder="Benutzername">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" name="name"
+           [(ngModel)]="model.name" placeholder="Name">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" name="vorname"
+           [(ngModel)]="model.vorname" placeholder="Vorname">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" name="email"
+           [(ngModel)]="model.email" placeholder="Email">
+  </div>
+  <div class="form-group">
+    <select [(ngModel)]="model.rolle" name="rolle" class="form-control">
+      <option value="admin">Admin</option>
+      <option value="super admin">Super Admin</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <input type="password" class="form-control" name="password"
+           [(ngModel)]="model.password" placeholder="Passwort">
+  </div>
+  <div class="form-group">
+    <input type="password" class="form-control" name="confirmPassword"
+            placeholder="Passwort bestätigen">
+  </div>
+  <div class="form-group text-center">
+    <button class="btn btn-success mr-2" type="submit">Regestrieren</button>
+    <button class="btn btn-danger mr-2" type="button" (click)="cancel()">Abbrechen</button>
+  </div>
+
+</form>

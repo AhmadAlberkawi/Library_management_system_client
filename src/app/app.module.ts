@@ -8,12 +8,16 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderNavComponent } from './header-nav/header-nav.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { OverviewPageComponent } from './overview-page/overview-page.component';
+import { AdminRegisterComponent } from './admin-register/admin-register.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderNavComponent
+    HeaderNavComponent,
+    OverviewPageComponent,
+    AdminRegisterComponent
   ],
   imports: [
     BrowserModule,

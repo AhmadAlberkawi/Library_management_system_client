@@ -13,7 +13,7 @@ export class AdminService {
   private currentAdminSource = new ReplaySubject<Admin>(1);
   currentAdmin$ = this.currentAdminSource.asObservable();
 
-  loggedIn: boolean;
+  logedIn = false;
 
   constructor(private http: HttpClient) { }
 
@@ -38,4 +38,7 @@ export class AdminService {
     this.currentAdminSource.next(null);
   }
 
+  adminRegister(model: any) {
+    return this.http.post(this.baseUrl + 'admin/addAdmin', model);
+  }
 }

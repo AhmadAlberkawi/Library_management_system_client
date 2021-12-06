@@ -4,6 +4,10 @@
   border: 5px solid #49C593;
 }
 
+.navbar{
+    margin-bottom:5%;
+}
+
 .dropdown {
   float: right;
   margin-top: 2%;
