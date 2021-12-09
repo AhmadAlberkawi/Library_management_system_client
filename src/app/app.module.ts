@@ -10,6 +10,7 @@ import { HeaderNavComponent } from './header-nav/header-nav.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { AdminRegisterComponent } from './admin-register/admin-register.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { AdminRegisterComponent } from './admin-register/admin-register.componen
     AppComponent,
     HeaderNavComponent,
     OverviewPageComponent,
-    AdminRegisterComponent
+    AdminRegisterComponent,
+    AdminPageComponent
   ],
   imports: [
     BrowserModule,

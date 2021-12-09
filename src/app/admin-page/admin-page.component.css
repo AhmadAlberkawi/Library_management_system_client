@@ -1,0 +1,12 @@
+
+.table {
+  margin-left: 20%;
+}
+
+.input-group-text{
+    width:2.5em;
+}
+
+input:checked + label {
+  background: red;
+}
