@@ -11,6 +11,8 @@ import { AdminService } from '../_services/admin.service';
 })
 export class AdminPageComponent implements OnInit {
 
+  registerFrom: boolean;
+
   idChoice: number;
 
   constructor(public adminservice: AdminService) { }
@@ -31,5 +33,9 @@ export class AdminPageComponent implements OnInit {
     this.adminservice.deleteAdmin(this.idChoice).subscribe(error => {
       console.log(error);
     });
+  }
+
+  addAdmin() {
+    this.registerFrom = true;
   }
 }

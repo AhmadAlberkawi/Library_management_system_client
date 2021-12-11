@@ -56,9 +56,4 @@ export class AdminService {
   deleteAdmin(id: number) {
     return this.http.delete(this.baseUrl + 'admin/' + id.toString());
   }
-
-
-
-
-
 }

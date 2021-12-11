@@ -1,0 +1,40 @@
+<app-header-nav></app-header-nav>
+<app-student-register [studentfromList]="student" *ngIf="registerFrom"></app-student-register>
+<div class="m-5 container" *ngIf="!registerFrom">
+  <button (click)="addStudent()" type="button" class="btn btn-success mr-2">Student hinzufügen</button>
+  <table class="table table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>#</th>
+        <th>#</th>
+        <th>Name</th>
+        <th>Vorname</th>
+        <th>Email</th>
+        <th>Matrikelnummer</th>
+        <th>Bibliotheknummer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let student of this.studentservice.students'>
+        <td>
+          <div class="input-group-text">
+            <input [(ngModel)]="idChoice" type='radio' value='{{student.id}}' />
+          </div>
+        </td>
+        <td>{{student.foto}}</td>
+        <td>{{student.name}}</td>
+        <td>{{student.vorname}}</td>
+        <td>{{student.email}}</td>
+        <td>{{student.matrikelNum}}</td>
+        <td>{{student.bibNum}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <button (click)="editStudent()" type="button" class="btn btn-success mr-2">Edit</button>
+  <button (click)="deleteStudent()" type="button" class="btn btn-success mr-2">Delete</button>
+</div>
+<h2 style="margin-left:60%">Your Cohice {{idChoice}}</h2>
+
+
+
+

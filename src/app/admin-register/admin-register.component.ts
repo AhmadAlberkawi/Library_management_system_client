@@ -15,7 +15,6 @@ export class AdminRegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   adminRegister() {
     this.adminservice.adminRegister(this.model).subscribe(Response => {
       console.log(Response)

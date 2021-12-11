@@ -39,26 +39,3 @@ export class AppComponent implements OnInit {
   }
 }
 
-
-
-
-  /*
-
-  students: any;
-
-
-  ngOnInit(): void {
-    this.getStudents();
-  }
-
-  getStudents() {
-
-    this.http.get('https://localhost:5001/Bvs_Api/Student').subscribe(Response => {
-      this.students = Response;
-    },
-      error => {
-        console.log(error);
-      }
-    )
-  }
-  */

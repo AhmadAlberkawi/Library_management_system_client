@@ -1,6 +1,7 @@
 <app-header-nav></app-header-nav>
-
-<div class="m-5 container">
+<app-admin-register *ngIf="registerFrom"></app-admin-register>
+<div class="m-5 container" *ngIf="!registerFrom">
+  <button (click)="addAdmin()" type="button" class="btn btn-success mr-2">Admin hinzufügen</button>
   <table class="table table-hover">
     <thead class="table-dark">
       <tr>

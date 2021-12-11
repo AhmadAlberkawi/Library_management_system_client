@@ -11,6 +11,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { AdminRegisterComponent } from './admin-register/admin-register.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
+import { StudentPageComponent } from './student-page/student-page.component';
+import { StudentRegisterComponent } from './student-register/student-register.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
     HeaderNavComponent,
     OverviewPageComponent,
     AdminRegisterComponent,
-    AdminPageComponent
+    AdminPageComponent,
+    StudentPageComponent,
+    StudentRegisterComponent
   ],
   imports: [
     BrowserModule,
