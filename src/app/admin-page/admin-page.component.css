@@ -1,6 +1,6 @@
 
-.table {
-  margin-left: 20%;
+.position {
+  margin-left: 12%;
 }
 
 .input-group-text{
@@ -9,4 +9,8 @@
 
 input:checked + label {
   background: red;
+}
+
+.btn-position {
+  margin-bottom: 1%;
 }

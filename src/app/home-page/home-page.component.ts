@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Admin } from './_models/admin';
-import { AdminService } from './_services/admin.service';
+import { Admin } from '../_models/admin';
+import { AdminService } from '../_services/admin.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-home-page',
+  templateUrl: './home-page.component.html',
+  styleUrls: ['./home-page.component.css']
 })
-
-export class AppComponent implements OnInit {
+export class HomePageComponent implements OnInit {
 
   title = '';
 
@@ -38,5 +37,5 @@ export class AppComponent implements OnInit {
       }
     )
   }
-}
 
+}

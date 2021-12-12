@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Student } from '../_models/student';
 import { StudentL } from '../_models/StudentL';
 import { StudentService } from '../_services/student.service';
@@ -12,10 +13,11 @@ import { StudentService } from '../_services/student.service';
 export class StudentPageComponent implements OnInit {
 
   registerFrom: boolean;
+  register: boolean;
   idChoice: number;
   student: StudentL;
 
-  constructor(public studentservice: StudentService) { }
+  constructor(public studentservice: StudentService, private router: Router) { }
 
   ngOnInit(): void {
     this.getStudents();
@@ -32,11 +34,13 @@ export class StudentPageComponent implements OnInit {
 
   addStudent() {
     this.registerFrom = true;
+    this.register = true;
   }
 
   editStudent() {
     this.student = this.studentservice.students.find(x => x.id == this.idChoice);
     this.registerFrom = true;
+    this.register = false;
   }
 
   deleteStudent() {
@@ -44,6 +48,11 @@ export class StudentPageComponent implements OnInit {
       console.log(error);
     }
     );
+    location.reload();
   }
 
+  cancelRegisterMode(event: boolean) {
+    this.registerFrom = event;
+    location.reload();
+  }
 }

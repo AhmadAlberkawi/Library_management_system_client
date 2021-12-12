@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { AdminService } from '../_services/admin.service';
 
 @Component({
@@ -8,9 +9,10 @@ import { AdminService } from '../_services/admin.service';
 })
 export class AdminRegisterComponent implements OnInit {
 
+  @Output() cancelRegister = new EventEmitter();
   model: any = {};
 
-  constructor(public adminservice: AdminService) { }
+  constructor(public adminservice: AdminService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -23,9 +25,10 @@ export class AdminRegisterComponent implements OnInit {
         console.log(error);
       }
     )
+    location.reload();
   }
 
   cancel() {
-
+    this.cancelRegister.emit(false);
   }
 }

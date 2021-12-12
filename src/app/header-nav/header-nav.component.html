@@ -17,19 +17,19 @@
     <div style="margin-left:40%">
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Überblick</a>
+          <a class="nav-link" routerLink='/overview' routerLinkActive="active">Überblick</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Studenten</a>
+          <a class="nav-link" routerLink='/student-page' routerLinkActive="active">Studenten</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Bücher</a>
+          <a class="nav-link" routerLink='/overview' routerLinkActive="active">Bücher</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Ausleihe</a>
+          <a class="nav-link" routerLink='/overview' routerLinkActive="active">Ausleihe</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" *ngIf="superAdmin">Admins</a>
+          <a class="nav-link" routerLink='/admin-page' routerLinkActive="active" *ngIf="superAdmin">Admins</a>
         </li>
       </ul>
     </div>

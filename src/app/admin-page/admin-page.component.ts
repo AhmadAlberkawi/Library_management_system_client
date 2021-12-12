@@ -1,7 +1,4 @@
-import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { AdminL } from '../_models/AdminL';
 import { AdminService } from '../_services/admin.service';
 
 @Component({
@@ -33,9 +30,15 @@ export class AdminPageComponent implements OnInit {
     this.adminservice.deleteAdmin(this.idChoice).subscribe(error => {
       console.log(error);
     });
+    location.reload();
   }
 
   addAdmin() {
     this.registerFrom = true;
   }
+
+  cancelRegisterMode(event: boolean) {
+    this.registerFrom = event;
+  }
+
 }

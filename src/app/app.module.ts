@@ -13,6 +13,7 @@ import { AdminRegisterComponent } from './admin-register/admin-register.componen
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { StudentPageComponent } from './student-page/student-page.component';
 import { StudentRegisterComponent } from './student-register/student-register.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { StudentRegisterComponent } from './student-register/student-register.co
     AdminRegisterComponent,
     AdminPageComponent,
     StudentPageComponent,
-    StudentRegisterComponent
+    StudentRegisterComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { StudentL } from '../_models/StudentL';
 import { StudentService } from '../_services/student.service';
 
@@ -10,12 +11,14 @@ import { StudentService } from '../_services/student.service';
 export class StudentRegisterComponent implements OnInit {
 
   @Input() studentfromList: StudentL;
+  @Input() isregister: boolean;
+  @Output() cancelRegister = new EventEmitter();
   model: any = {};
 
-  constructor(public studentservice: StudentService) { }
+  constructor(public studentservice: StudentService, private router: Router) { }
 
   ngOnInit(): void {
-    if (this.studentfromList) {
+    if (!this.isregister) {
       this.model.id = this.studentfromList.id;
       this.model.name = this.studentfromList.name;
       this.model.vorname = this.studentfromList.vorname;
@@ -27,7 +30,7 @@ export class StudentRegisterComponent implements OnInit {
 
   addOrEditStudent() {
 
-    if (this.studentfromList == null) {
+    if (this.isregister) {
       this.studentservice.addStudent(this.model).subscribe(error => {
         console.log(error);
       });
@@ -37,9 +40,11 @@ export class StudentRegisterComponent implements OnInit {
         console.log(error);
       });
     }
+    this.cancelRegister.emit(false);
+    location.reload();
   }
 
   cancel() {
-
+    this.cancelRegister.emit(false);
   }
 }

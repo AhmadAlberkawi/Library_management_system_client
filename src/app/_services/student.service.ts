@@ -30,7 +30,7 @@ export class StudentService {
   }
 
   editStudent(model: any) {
-    return this.http.post(this.baseUrl + '/editStudent', model);
+    return this.http.put(this.baseUrl + '/editStudent', model);
   }
 
   deleteStudent(id: number) {

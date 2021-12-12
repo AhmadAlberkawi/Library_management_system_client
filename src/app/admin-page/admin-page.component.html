@@ -1,35 +1,36 @@
 <app-header-nav></app-header-nav>
-<app-admin-register *ngIf="registerFrom"></app-admin-register>
-<div class="m-5 container" *ngIf="!registerFrom">
-  <button (click)="addAdmin()" type="button" class="btn btn-success mr-2">Admin hinzufügen</button>
-  <table class="table table-hover">
-    <thead class="table-dark">
-      <tr>
-        <th>#</th>
-        <th>#</th>
-        <th>Name</th>
-        <th>Vorname</th>
-        <th>Email</th>
-        <th>Rolle</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor='let admin of this.adminservice.admins'>
-        <td>
-          <div class="input-group-text">
-            <input [(ngModel)]="idChoice" type='radio' value='{{admin.id}}' />
-          </div>
-        </td>
-        <td>{{admin.foto}}</td>
-        <td>{{admin.name}}</td>
-        <td>{{admin.vorname}}</td>
-        <td>{{admin.email}}</td>
-        <td>{{admin.rolle}}</td>
-      </tr>
-    </tbody>
-  </table>
-  <button (click)="deleteAdmin()" type="button" class="btn btn-success mr-2">Delete</button>
+<app-admin-register *ngIf="registerFrom" (cancelRegister)="cancelRegisterMode($event)"></app-admin-register>
+<div class="position">
+  <div class="m-5 container positon" *ngIf="!registerFrom">
+    <button (click)="addAdmin()" type="button" class="btn btn-success mr-2 btn-position">Admin hinzufügen</button>
+    <table class="table table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>#</th>
+          <th>Name</th>
+          <th>Vorname</th>
+          <th>Email</th>
+          <th>Rolle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let admin of this.adminservice.admins'>
+          <td>
+            <div class="input-group-text">
+              <input [(ngModel)]="idChoice" type='radio' value='{{admin.id}}' />
+            </div>
+          </td>
+          <td>{{admin.foto}}</td>
+          <td>{{admin.name}}</td>
+          <td>{{admin.vorname}}</td>
+          <td>{{admin.email}}</td>
+          <td>{{admin.rolle}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <button (click)="deleteAdmin()" type="button" class="btn btn-danger mr-2">Delete</button>
+  </div>
 </div>
-<h2 style="margin-left:60%">Your Cohice {{idChoice}}</h2>
 
 
