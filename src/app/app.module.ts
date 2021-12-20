@@ -14,6 +14,8 @@ import { AdminPageComponent } from './admin-page/admin-page.component';
 import { StudentPageComponent } from './student-page/student-page.component';
 import { StudentRegisterComponent } from './student-register/student-register.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { BookPageComponent } from './book-page/book-page.component';
+import { BookRegisterComponent } from './book-register/book-register.component';
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { HomePageComponent } from './home-page/home-page.component';
     AdminPageComponent,
     StudentPageComponent,
     StudentRegisterComponent,
-    HomePageComponent
+    HomePageComponent,
+    BookPageComponent,
+    BookRegisterComponent
   ],
   imports: [
     BrowserModule,

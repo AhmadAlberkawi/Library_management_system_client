@@ -44,10 +44,10 @@ export class StudentPageComponent implements OnInit {
   }
 
   deleteStudent() {
-    this.studentservice.deleteStudent(this.idChoice).subscribe(error => {
-      console.log(error);
-    }
+    this.studentservice.deleteStudent(this.idChoice).subscribe(
+      error => { console.log(error);}
     );
+
     location.reload();
   }
 

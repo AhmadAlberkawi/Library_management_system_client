@@ -19,9 +19,7 @@ export class StudentService {
   getStudents() {
 
     return this.http.get(this.baseUrl).pipe(
-      map((Response: Array<StudentL>) => {
-        this.students = Response;
-      })
+      map((Response: Array<StudentL>) => {this.students = Response;})
     );
   }
 

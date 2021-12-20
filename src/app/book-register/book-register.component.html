@@ -1,0 +1,41 @@
+<form class="container" #registerForm="ngForm" (ngSubmit)="addOrEditBook()" autocomplete="off">
+  <h2 class="text-center text-primary" *ngIf="isregister">Regestrieren</h2>
+  <h2 class="text-center text-primary" *ngIf="!isregister">Bearbeiten</h2>
+  <hr>
+  <div class="form-group">
+    <input type="text" class="form-control" name="title"
+           [(ngModel)]="model.title" placeholder="Title">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" name="isbn"
+           [(ngModel)]="model.isbn" placeholder="ISBN">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" name="verlag"
+           [(ngModel)]="model.verlag" placeholder="Verlag">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" name="verfuegbar"
+           [(ngModel)]="model.verfuegbar" placeholder="Verfügbar">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" name="anzahl"
+           [(ngModel)]="model.anzahl" placeholder="Anzahl">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" name="autor"
+           [(ngModel)]="model.autor" placeholder="Autor">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" name="kategorie"
+           [(ngModel)]="model.kategorie" placeholder="Kategorie">
+  </div>
+
+  <div class="form-group text-center">
+    <button class="btn btn-success mr-2" *ngIf="isregister" type="submit">Regestrieren</button>
+    <button class="btn btn-success mr-2" *ngIf="!isregister" type="submit">Update</button>
+    <button class="btn btn-danger mr-2" type="button" (click)="cancel()">Abbrechen</button>
+  </div> 
+
+</form>
+
