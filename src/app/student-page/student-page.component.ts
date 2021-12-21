@@ -17,6 +17,8 @@ export class StudentPageComponent implements OnInit {
   idChoice: number;
   student: StudentL;
 
+  borrowState: boolean;
+
   constructor(public studentservice: StudentService, private router: Router) { }
 
   ngOnInit(): void {
@@ -54,5 +56,17 @@ export class StudentPageComponent implements OnInit {
   cancelRegisterMode(event: boolean) {
     this.registerFrom = event;
     location.reload();
+  }
+
+  // Borrow Part
+
+  borrowBook() {
+    if (typeof this.idChoice !== 'undefined') {
+
+    }
+  }
+
+  showBooks() {
+
   }
 }

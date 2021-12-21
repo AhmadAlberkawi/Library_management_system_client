@@ -3,7 +3,7 @@
                       [isregister]="register"
                       *ngIf="registerFrom"></app-student-register>
 <div class="position">
-  <div class="m-5 container" *ngIf="!registerFrom">
+  <div class="m-5 container" *ngIf="!registerFrom && !borrowState">
     <button (click)="addStudent()" type="button" class="btn btn-success mr-2 btn-position">Student hinzufügen</button>
     <table class="table table-hover">
       <thead class="table-dark">
@@ -35,7 +35,51 @@
     </table>
     <button (click)="editStudent()" type="button" class="btn btn-primary mr-2">Edit</button>
     <button (click)="deleteStudent()" type="button" class="btn btn-danger mr-2">Delete</button>
+    <button (click)="borrowBook()" type="button" class="btn btn-secondary mr-2">Buch ausleihen</button>
+    <button (click)="showBooks()" type="button" class="btn btn-info mr-2">Bücher anzeigen</button>
   </div>
+
+
+  <div class="m-5 container" *ngIf="borrowState">
+    <h2>Bitte wählen Sie ein Buch aus</h2>
+    <table class="table table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>#</th>
+          <th>#</th>
+          <th>Title</th>
+          <th>Isbn</th>
+          <th>Verlag</th>
+          <th>Verfügbar</th>
+          <th>Anzahl</th>
+          <th>Autor</th>
+          <th>Kategorie</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let book of this.bookService.books'>
+          <td>
+            <div class="input-group-text">
+              <input [(ngModel)]="idChoice" type='radio' value='{{book.id}}' />
+            </div>
+          </td>
+          <td>{{book.foto}}</td>
+          <td>{{book.title}}</td>
+          <td>{{book.isbn}}</td>
+          <td>{{book.verlag}}</td>
+          <td>{{book.verfuegbar}}</td>
+          <td>{{book.anzahl}}</td>
+          <td>{{book.autor}}</td>
+          <td>{{book.kategorie}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <button (click)="borrowBookk()" type="button" class="btn btn-primary mr-2">Edit</button>
+  </div>
+
+
+
+
 </div>
 
 

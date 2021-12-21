@@ -16,6 +16,7 @@ import { StudentRegisterComponent } from './student-register/student-register.co
 import { HomePageComponent } from './home-page/home-page.component';
 import { BookPageComponent } from './book-page/book-page.component';
 import { BookRegisterComponent } from './book-register/book-register.component';
+import { BorrowPageComponent } from './borrow-page/borrow-page.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { BookRegisterComponent } from './book-register/book-register.component';
     StudentRegisterComponent,
     HomePageComponent,
     BookPageComponent,
-    BookRegisterComponent
+    BookRegisterComponent,
+    BorrowPageComponent
   ],
   imports: [
     BrowserModule,

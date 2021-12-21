@@ -31,7 +31,6 @@ export class AppComponent implements OnInit {
   login() {
     this.adminservice.login(this.model).subscribe(Response => {
       this.router.navigateByUrl('/overview');
-      this.adminservice.logedIn = true;
     },
       error => {
         console.log(error);

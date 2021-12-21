@@ -11,19 +11,18 @@ import { AdminL } from '../_models/AdminL';
 export class AdminService {
 
   baseUrl = 'https://localhost:5001/Bvs_Api/';
+
   private currentAdminSource = new ReplaySubject<Admin>(1);
   currentAdmin$ = this.currentAdminSource.asObservable();
 
   admins: Array<AdminL>;
 
-  logedIn = false;
-
   constructor(private http: HttpClient) { }
 
   login(model: any) {
     return this.http.post(this.baseUrl + 'admin/login', model).pipe(
-      map((response: Admin) => {
-        const admin = response;
+      map((response: Admin) => { const admin = response;
+
         if (admin) {
           localStorage.setItem('admin', JSON.stringify(admin));
           this.currentAdminSource.next(admin);
@@ -47,9 +46,7 @@ export class AdminService {
 
   getAdmins() {
     return this.http.get(this.baseUrl + 'admin').pipe(
-      map((Response: Array<AdminL>) => {
-        this.admins = Response;
-      })
+      map((Response: Array<AdminL>) => { this.admins = Response;})
     );
   }
 

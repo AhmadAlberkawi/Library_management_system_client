@@ -11,7 +11,7 @@ import { AdminService } from '../_services/admin.service';
 })
 export class HeaderNavComponent implements OnInit {
 
-  userLastName = 'Ahmad';
+  userLastName :string;
 
   currentAdmin$: Observable<Admin>;
 
@@ -24,6 +24,10 @@ export class HeaderNavComponent implements OnInit {
 
     if (!this.currentAdmin$) {
       this.router.navigateByUrl('/');
+    }
+    else {
+      const admin: Admin = JSON.parse(localStorage.getItem('admin'));
+      this.userLastName = admin.name;
     }
   }
 

@@ -10,8 +10,6 @@ import { AdminService } from '../_services/admin.service';
 })
 export class HomePageComponent implements OnInit {
 
-  title = '';
-
   model: any = {};
 
   constructor(public adminservice: AdminService, private router: Router) { }
@@ -28,14 +26,12 @@ export class HomePageComponent implements OnInit {
   }
 
   login() {
-    this.adminservice.login(this.model).subscribe(Response => {
+      this.adminservice.login(this.model).subscribe(Response => {
       this.router.navigateByUrl('/overview');
-      this.adminservice.logedIn = true;
     },
       error => {
         console.log(error);
       }
     )
   }
-
 }
