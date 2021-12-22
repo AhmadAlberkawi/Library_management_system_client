@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { BookL } from '../_models/bookL';
 import { Borrow } from '../_models/Borrow';
+import { BorrowAdd } from '../_models/BorrowAdd';
+import { BorrowForStudent } from '../_models/BorrowForStudent';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class BorrowService {
 
   borrows: Array<Borrow>;
 
-  books: Array<BookL>;
+  borrowForStudent: Array<BorrowForStudent>;
 
   constructor(private http: HttpClient) { }
 
@@ -25,12 +26,12 @@ export class BorrowService {
 
   getBorrowOneStudent(stId: number) {
     return this.http.get(this.baseUrl + stId).pipe(
-      map((Response: Array<BookL>) => { this.books = Response; })
+      map((Response: Array<BorrowForStudent>) => { this.borrowForStudent = Response; })
     );
   }
 
-  addBorrow(model: any) {
-    return this.http.post(this.baseUrl, model);
+  addBorrow(model: BorrowAdd) {
+    return this.http.post(this.baseUrl+'addBorrow', model);
   }
 
   deleteBorrow(id: number) {

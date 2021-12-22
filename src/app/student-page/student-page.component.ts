@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { BorrowAdd } from '../_models/BorrowAdd';
 import { Student } from '../_models/student';
 import { StudentL } from '../_models/StudentL';
+import { BookService } from '../_services/book.service';
+import { BorrowService } from '../_services/borrow.service';
 import { StudentService } from '../_services/student.service';
-
 
 @Component({
   selector: 'app-student-page',
@@ -17,9 +19,16 @@ export class StudentPageComponent implements OnInit {
   idChoice: number;
   student: StudentL;
 
-  borrowState: boolean;
+  // Borrow
 
-  constructor(public studentservice: StudentService, private router: Router) { }
+  borrowState: boolean;
+  borrowForStudentState: boolean;
+  bkIdChoice: number;
+  AddBorrow: BorrowAdd;
+  borrowIdChoice: number;
+
+  constructor(public studentservice: StudentService, public bookService: BookService,
+    public borrowService: BorrowService, private router: Router) { }
 
   ngOnInit(): void {
     this.getStudents();
@@ -58,15 +67,58 @@ export class StudentPageComponent implements OnInit {
     location.reload();
   }
 
+  getBooks() {
+    this.bookService.getBooks().subscribe(
+      error => { console.log(error); }
+    );
+  }
+
+  // Borrow REST_API
+
+  getBorrowOneStudent() {
+    this.borrowService.getBorrowOneStudent(this.idChoice).subscribe();
+  }
+
+  deleteBorrow() {
+    if (typeof this.borrowIdChoice !== 'undefined') {
+      this.borrowService.deleteBorrow(this.borrowIdChoice).subscribe();
+      this.borrowForStudentState = false;
+    }
+  }
+
   // Borrow Part
 
   borrowBook() {
     if (typeof this.idChoice !== 'undefined') {
-
+      this.getBooks();
+      this.borrowState = true;
     }
   }
 
-  showBooks() {
+  borrow() {
+    if (typeof this.bkIdChoice !== 'undefined') {
 
+      this.AddBorrow = { studentId: this.idChoice, bookId: this.bkIdChoice };
+
+      this.borrowService.addBorrow(this.AddBorrow).subscribe();
+
+      this.borrowState = false;
+    }
   }
+
+  cancel() {
+    this.borrowState = false;
+    this.borrowForStudentState = false;
+  }
+
+
+  // books borrowed from a student
+
+  showBooks() {
+    if (typeof this.idChoice !== 'undefined') {
+      this.getBorrowOneStudent();
+      this.borrowForStudentState = true;
+    }
+  }
+
 }
