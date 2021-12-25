@@ -10,14 +10,16 @@ export class OverviewService {
 
   baseUrl = 'https://localhost:5001/Bvs_Api/Overview/';
 
-  overview: Overview;
+  //overview: Overview;
 
   constructor(private http: HttpClient) { }
 
   getOverview() {
 
     return this.http.get(this.baseUrl).pipe(
-      map((Response: Overview) => { this.overview = Response; })
+      map((overview: Overview) => {
+        return overview;
+      })
     );
   }
 }

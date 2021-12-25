@@ -6,14 +6,15 @@ import { BorrowPageComponent } from './borrow-page/borrow-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { StudentPageComponent } from './student-page/student-page.component';
+import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
-  { path: 'overview', component: OverviewPageComponent },
-  { path: 'student-page', component: StudentPageComponent },
-  { path: 'Book-page', component: BookPageComponent },
-  { path: 'borrow-page', component: BorrowPageComponent },
-  { path: 'admin-page', component: AdminPageComponent },
+  { path: 'overview', component: OverviewPageComponent, canActivate: [AuthGuard] },
+  { path: 'student-page', component: StudentPageComponent, canActivate: [AuthGuard] },
+  { path: 'Book-page', component: BookPageComponent, canActivate: [AuthGuard] },
+  { path: 'borrow-page', component: BorrowPageComponent, canActivate: [AuthGuard] },
+  { path: 'admin-page', component: AdminPageComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

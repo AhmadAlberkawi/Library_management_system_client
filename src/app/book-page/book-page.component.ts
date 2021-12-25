@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { BookL } from '../_models/bookL';
 import { BookService } from '../_services/book.service';
 
@@ -14,7 +15,7 @@ export class BookPageComponent implements OnInit {
   isregisterValue: boolean;
   book: BookL;
 
-  constructor(private bookService: BookService) { }
+  constructor(private bookService: BookService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getBooks();
@@ -40,9 +41,13 @@ export class BookPageComponent implements OnInit {
   }
 
   deleteBook() {
-    this.bookService.deleteBook(this.idChoice).subscribe(
-      error => { console.log(error); }
-    );
+    this.bookService.deleteBook(this.idChoice).subscribe(response => {
+      console.log(response);
+    },
+      error => {
+        console.log(error);
+        this.toastr.error(error.error);
+      });
     location.reload();
   }
 

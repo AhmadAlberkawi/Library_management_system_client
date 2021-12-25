@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { BookL } from '../_models/bookL';
 import { BookService } from '../_services/book.service';
 
@@ -14,7 +15,7 @@ export class BookRegisterComponent implements OnInit {
   @Input() isregister: boolean;
   model: any = {};
 
-  constructor(private bookService: BookService) { }
+  constructor(private bookService: BookService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     if (!this.isregister) {
@@ -31,14 +32,22 @@ export class BookRegisterComponent implements OnInit {
 
   addOrEditBook() {
     if (this.isregister) {
-      this.bookService.addBook(this.model).subscribe(
-        error => { console.log(error); }
-      );
+      this.bookService.addBook(this.model).subscribe(response => {
+        console.log(response);
+      },
+        error => {
+          console.log(error);
+          this.toastr.error(error.error);
+        });
     }
     else {
-      this.bookService.editBook(this.model).subscribe(
-        error => { console.log(error); }
-      );
+      this.bookService.editBook(this.model).subscribe(response => {
+        console.log(response);
+      },
+        error => {
+          console.log(error);
+          this.toastr.error(error.error);
+        });
     }
     this.cancelRegister.emit(false);
     location.reload();

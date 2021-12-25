@@ -21,12 +21,12 @@ export class OverviewPageComponent implements OnInit {
 
   getOverview() {
     this.overviewService.getOverview().subscribe(
-      Response => {
-        if (this.overviewService.overview) {
-        this.students = this.overviewService.overview.anzahlStudent;
-        this.books = this.overviewService.overview.anzahlBook;
-        this.borrows = this.overviewService.overview.anzahlBorrow;
-          this.admins = this.overviewService.overview.anzahlAdmin;
+      overview => {
+        if (overview) {
+          this.students = overview.anzahlStudent;
+          this.books = overview.anzahlBook;
+          this.borrows = overview.anzahlBorrow;
+          this.admins = overview.anzahlAdmin;
         }
       },
       error => { console.log(error); }

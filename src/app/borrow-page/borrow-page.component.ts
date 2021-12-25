@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { BorrowService } from '../_services/borrow.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class BorrowPageComponent implements OnInit {
 
   idChoice: number;
 
-  constructor(public borrowService: BorrowService) { }
+  constructor(public borrowService: BorrowService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getBorrow();
@@ -25,7 +26,13 @@ export class BorrowPageComponent implements OnInit {
 
   deleteBorrow() {
     if (typeof this.idChoice !== 'undefined') {
-      this.borrowService.deleteBorrow(this.idChoice).subscribe();
+      this.borrowService.deleteBorrow(this.idChoice).subscribe(response => {
+        console.log(response);
+      },
+        error => {
+          console.log(error);
+          this.toastr.error(error.error);
+        });
       location.reload();
     }
   }

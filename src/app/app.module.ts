@@ -17,6 +17,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { BookPageComponent } from './book-page/book-page.component';
 import { BookRegisterComponent } from './book-register/book-register.component';
 import { BorrowPageComponent } from './borrow-page/borrow-page.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -39,7 +40,10 @@ import { BorrowPageComponent } from './borrow-page/borrow-page.component';
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
+import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Admin } from '../_models/admin';
 import { AdminL } from '../_models/AdminL';
@@ -12,7 +12,7 @@ export class AdminService {
 
   baseUrl = 'https://localhost:5001/Bvs_Api/';
 
-  private currentAdminSource = new ReplaySubject<Admin>(1);
+  private currentAdminSource = new BehaviorSubject<Admin>(null);
   currentAdmin$ = this.currentAdminSource.asObservable();
 
   admins: Array<AdminL>;
@@ -46,8 +46,11 @@ export class AdminService {
 
   getAdmins() {
     return this.http.get(this.baseUrl + 'admin').pipe(
-      map((Response: Array<AdminL>) => { this.admins = Response;})
+      map((Response: Array<AdminL>) => {
+        this.admins = Response;
+      })
     );
+    
   }
 
   deleteAdmin(id: number) {

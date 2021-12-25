@@ -1,6 +1,6 @@
 <form class="container" #registerForm="ngForm" (ngSubmit)="addOrEditStudent()" autocomplete="off">
-  <h2 class="text-center text-primary" *ngIf="!studentfromList">Regestrieren</h2>
-  <h2 class="text-center text-primary" *ngIf="studentfromList">Bearbeiten</h2>
+  <h2 class="text-center text-primary" *ngIf="isregister">Regestrieren</h2>
+  <h2 class="text-center text-primary" *ngIf="!isregister">Bearbeiten</h2>
   <hr>
   <div class="form-group">
     <input type="text" class="form-control" name="name"
@@ -24,8 +24,8 @@
   </div>
 
   <div class="form-group text-center">
-    <button class="btn btn-success mr-2" *ngIf="!studentfromList" type="submit">Regestrieren</button>
-    <button class="btn btn-success mr-2" *ngIf="studentfromList" type="submit">Update</button>
+    <button class="btn btn-success mr-2" *ngIf="isregister" type="submit">Regestrieren</button>
+    <button class="btn btn-success mr-2" *ngIf="!isregister" type="submit">Update</button>
     <button class="btn btn-danger mr-2" type="button" (click)="cancel()">Abbrechen</button>
   </div>
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Admin } from '../_models/admin';
 import { AdminService } from '../_services/admin.service';
 
@@ -12,7 +13,7 @@ export class HomePageComponent implements OnInit {
 
   model: any = {};
 
-  constructor(public adminservice: AdminService, private router: Router) { }
+  constructor(public adminservice: AdminService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.setCurrentAdmin();
@@ -26,12 +27,13 @@ export class HomePageComponent implements OnInit {
   }
 
   login() {
-      this.adminservice.login(this.model).subscribe(Response => {
+    this.adminservice.login(this.model).subscribe(response => {
+      console.log(response);
       this.router.navigateByUrl('/overview');
     },
       error => {
         console.log(error);
-      }
-    )
-  }
+        this.toastr.error(error.error);
+      });
+    }
 }

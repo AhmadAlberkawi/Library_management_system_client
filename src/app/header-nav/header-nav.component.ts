@@ -22,10 +22,7 @@ export class HeaderNavComponent implements OnInit {
   ngOnInit(): void {
     this.currentAdmin$ = this.adminservice.currentAdmin$;
 
-    if (!this.currentAdmin$) {
-      this.router.navigateByUrl('/');
-    }
-    else {
+    if (this.currentAdmin$) {
       const admin: Admin = JSON.parse(localStorage.getItem('admin'));
       this.userLastName = admin.name;
     }

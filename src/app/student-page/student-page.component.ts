@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { BorrowAdd } from '../_models/BorrowAdd';
 import { Student } from '../_models/student';
 import { StudentL } from '../_models/StudentL';
@@ -28,7 +29,7 @@ export class StudentPageComponent implements OnInit {
   borrowIdChoice: number;
 
   constructor(public studentservice: StudentService, public bookService: BookService,
-    public borrowService: BorrowService, private router: Router) { }
+    public borrowService: BorrowService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getStudents();
@@ -56,8 +57,13 @@ export class StudentPageComponent implements OnInit {
 
   deleteStudent() {
     this.studentservice.deleteStudent(this.idChoice).subscribe(
-      error => { console.log(error);}
-    );
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+        this.toastr.error(error.error);
+      });
 
     location.reload();
   }
@@ -76,7 +82,13 @@ export class StudentPageComponent implements OnInit {
   // Borrow REST_API
 
   getBorrowOneStudent() {
-    this.borrowService.getBorrowOneStudent(this.idChoice).subscribe();
+    this.borrowService.getBorrowOneStudent(this.idChoice).subscribe(response => {
+      console.log(response);
+    },
+      error => {
+        console.log(error);
+        this.toastr.error(error.error);
+      });
   }
 
   deleteBorrow() {
@@ -100,7 +112,13 @@ export class StudentPageComponent implements OnInit {
 
       this.AddBorrow = { studentId: this.idChoice, bookId: this.bkIdChoice };
 
-      this.borrowService.addBorrow(this.AddBorrow).subscribe();
+      this.borrowService.addBorrow(this.AddBorrow).subscribe(response => {
+        console.log(response);
+      },
+        error => {
+          console.log(error);
+          this.toastr.error(error.error);
+        });
 
       this.borrowState = false;
     }
@@ -120,5 +138,4 @@ export class StudentPageComponent implements OnInit {
       this.borrowForStudentState = true;
     }
   }
-
 }

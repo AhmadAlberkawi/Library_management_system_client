@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { AdminService } from '../_services/admin.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class AdminPageComponent implements OnInit {
 
   idChoice: number;
 
-  constructor(public adminservice: AdminService) { }
+  constructor(public adminservice: AdminService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getAdmins();
@@ -27,9 +28,13 @@ export class AdminPageComponent implements OnInit {
   }
 
   deleteAdmin() {
-    this.adminservice.deleteAdmin(this.idChoice).subscribe(error => {
-      console.log(error);
-    });
+    this.adminservice.deleteAdmin(this.idChoice).subscribe(response => {
+      console.log(response);
+    },
+      error => {
+        console.log(error);
+        this.toastr.error(error.error);
+      });
     location.reload();
   }
 
