@@ -23,6 +23,7 @@ export class HomePageComponent implements OnInit {
     const admin: Admin = JSON.parse(localStorage.getItem('admin'));
     if (admin) {
       this.adminservice.setCurrentAdmin(admin);
+      this.router.navigateByUrl('/overview');
     }
   }
 

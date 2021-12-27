@@ -114,6 +114,7 @@ export class StudentPageComponent implements OnInit {
 
       this.borrowService.addBorrow(this.AddBorrow).subscribe(response => {
         console.log(response);
+        this.toastr.success("Das Buch wurde erfolgreich ausgeliehen");
       },
         error => {
           console.log(error);

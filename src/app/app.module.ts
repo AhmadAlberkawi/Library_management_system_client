@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderNavComponent } from './header-nav/header-nav.component';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { OverviewPageComponent } from './overview-page/overview-page.component';
 import { AdminRegisterComponent } from './admin-register/admin-register.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
@@ -17,7 +16,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { BookPageComponent } from './book-page/book-page.component';
 import { BookRegisterComponent } from './book-register/book-register.component';
 import { BorrowPageComponent } from './borrow-page/borrow-page.component';
-import { ToastrModule } from 'ngx-toastr';
+import { SharedModule } from './_modules/shared.module';
 
 
 @NgModule({
@@ -40,10 +39,7 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    BsDropdownModule.forRoot(),
-    ToastrModule.forRoot({
-      positionClass: 'toast-bottom-right'
-    })
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,10 +1,10 @@
-<div>
+<div *ngIf="(adminservice.currentAdmin$ | async) as admin">
 
   <div class="main-nav">
     <a href="index.html"> <img src="https://i.imgur.com/2BrRGoF.png" class="imgleft" alt="logo" /></a>
     <h5 class="title-header">University Library<br> Management System</h5>
     <div class="dropdown" dropdown>
-      <a class="dropdown-toggle text-light" dropdownToggle>Wilkommen {{userLastName}}</a>
+      <a class="dropdown-toggle text-light" dropdownToggle>Wilkommen {{admin.name | titlecase}}</a>
       <div class="dropdown-menu mt-3" *dropdownMenu>
         <a class="dropdown-item">Profil bearbeiten</a>
         <div class="dropdown-divider"></div>
@@ -29,7 +29,7 @@
           <a class="nav-link" routerLink='/borrow-page' routerLinkActive="active">Ausleihe</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink='/admin-page' routerLinkActive="active" *ngIf="superAdmin">Admins</a>
+          <a class="nav-link" routerLink='/admin-page' routerLinkActive="active" *ngIf="(admin.rolle == 'Super Admin')">Admins</a>
         </li>
       </ul>
     </div>

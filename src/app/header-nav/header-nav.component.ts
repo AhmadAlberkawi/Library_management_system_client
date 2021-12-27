@@ -11,21 +11,11 @@ import { AdminService } from '../_services/admin.service';
 })
 export class HeaderNavComponent implements OnInit {
 
-  userLastName :string;
-
-  currentAdmin$: Observable<Admin>;
-
-  superAdmin: boolean = true;
+  // currentAdmin$: Observable<Admin>;
 
   constructor(public adminservice: AdminService, private router: Router) { }
 
   ngOnInit(): void {
-    this.currentAdmin$ = this.adminservice.currentAdmin$;
-
-    if (this.currentAdmin$) {
-      const admin: Admin = JSON.parse(localStorage.getItem('admin'));
-      this.userLastName = admin.name;
-    }
   }
 
   logout() {
