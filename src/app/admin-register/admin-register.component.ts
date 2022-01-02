@@ -19,13 +19,13 @@ export class AdminRegisterComponent implements OnInit {
 
   adminRegister() {
     this.adminservice.adminRegister(this.model).subscribe(Response => {
-      console.log(Response)
+      console.log(Response);
+      location.reload();
     },
       error => {
         console.log(error);
       }
     )
-    location.reload();
   }
 
   cancel() {

@@ -34,23 +34,19 @@ export class BookRegisterComponent implements OnInit {
     if (this.isregister) {
       this.bookService.addBook(this.model).subscribe(response => {
         console.log(response);
-      },
-        error => {
-          console.log(error);
-          this.toastr.error(error.error);
-        });
+
+        this.cancelRegister.emit(false);
+        location.reload();
+      });
     }
     else {
       this.bookService.editBook(this.model).subscribe(response => {
         console.log(response);
-      },
-        error => {
-          console.log(error);
-          this.toastr.error(error.error);
-        });
+
+        this.cancelRegister.emit(false);
+        location.reload();
+      });
     }
-    this.cancelRegister.emit(false);
-    location.reload();
   }
 
   cancel() {

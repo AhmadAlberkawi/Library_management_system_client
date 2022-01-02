@@ -31,10 +31,6 @@ export class HomePageComponent implements OnInit {
     this.adminservice.login(this.model).subscribe(response => {
       console.log(response);
       this.router.navigateByUrl('/overview');
-    },
-      error => {
-        console.log(error);
-        this.toastr.error(error.error);
-      });
-    }
+    });
+  }
 }

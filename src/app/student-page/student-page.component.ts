@@ -59,13 +59,11 @@ export class StudentPageComponent implements OnInit {
     this.studentservice.deleteStudent(this.idChoice).subscribe(
       response => {
         console.log(response);
+        location.reload();
       },
       error => {
         console.log(error);
-        this.toastr.error(error.error);
       });
-
-    location.reload();
   }
 
   cancelRegisterMode(event: boolean) {
@@ -87,8 +85,7 @@ export class StudentPageComponent implements OnInit {
     },
       error => {
         console.log(error);
-        this.toastr.error(error.error);
-      });
+    });
   }
 
   deleteBorrow() {

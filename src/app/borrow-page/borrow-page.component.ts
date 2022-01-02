@@ -28,12 +28,11 @@ export class BorrowPageComponent implements OnInit {
     if (typeof this.idChoice !== 'undefined') {
       this.borrowService.deleteBorrow(this.idChoice).subscribe(response => {
         console.log(response);
+        location.reload();
       },
         error => {
           console.log(error);
-          this.toastr.error(error.error);
-        });
-      location.reload();
+        });   
     }
   }
 }

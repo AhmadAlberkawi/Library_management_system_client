@@ -43,12 +43,8 @@ export class BookPageComponent implements OnInit {
   deleteBook() {
     this.bookService.deleteBook(this.idChoice).subscribe(response => {
       console.log(response);
-    },
-      error => {
-        console.log(error);
-        this.toastr.error(error.error);
-      });
-    location.reload();
+      location.reload();
+    });
   }
 
   cancelRegisterMode(event: boolean) {
