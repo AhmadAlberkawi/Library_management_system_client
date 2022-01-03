@@ -5,4 +5,6 @@ export interface BorrowForStudent{
   isbn: string;
   verlag: string;
   autor: string;
+  borrowedUntil: string;
+  days: number;
 }

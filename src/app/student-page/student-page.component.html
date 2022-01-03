@@ -80,7 +80,7 @@
   </div>
 
   <div class="m-5 container" *ngIf="borrowForStudentState">
-    <h3>Zum zurückgeben wählen bitte Sie ein Buch aus</h3>
+    <h3>Zum zurückgeben wählen Sie bitte ein Buch aus</h3>
     <table class="table table-hover">
       <thead class="table-dark">
         <tr>
@@ -90,6 +90,8 @@
           <th>Isbn</th>
           <th>Verlag</th>
           <th>Autor</th>
+          <th>Ausgeliehen Bis</th>
+          <th>Übrige Tage</th>
         </tr>
       </thead>
       <tbody>
@@ -104,6 +106,8 @@
           <td>{{borrow.isbn}}</td>
           <td>{{borrow.verlag}}</td>
           <td>{{borrow.autor}}</td>
+          <td>{{borrow.borrowedUntil}}</td>
+          <td>{{borrow.days}}</td>
         </tr>
       </tbody>
     </table>

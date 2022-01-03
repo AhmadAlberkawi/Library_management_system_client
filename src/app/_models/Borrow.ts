@@ -6,4 +6,6 @@ export interface Borrow {
   verlag: string;
   autor: string;
   name: string;
+  borrowedUntil: string;
+  days: number;
 }

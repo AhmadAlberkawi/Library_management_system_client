@@ -11,7 +11,9 @@
           <th>ISBN</th>
           <th>Verlag</th>
           <th>Autor</th>
-          <th>Ausgelien Von</th>
+          <th>Ausgeliehen Von</th>
+          <th>Ausgeliehen Bis</th>
+          <th>Übrige Tage</th>
         </tr>
       </thead>
       <tbody>
@@ -27,6 +29,8 @@
           <td>{{borrow.verlag}}</td>
           <td>{{borrow.autor}}</td>
           <td>{{borrow.name}}</td>
+          <td>{{borrow.borrowedUntil}}</td>
+          <td>{{borrow.days}}</td>
         </tr>
       </tbody>
     </table>
