@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminEditComponent } from './admin-edit/admin-edit.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { BookPageComponent } from './book-page/book-page.component';
 import { BorrowPageComponent } from './borrow-page/borrow-page.component';
@@ -23,7 +24,8 @@ const routes: Routes = [
       { path: 'student-page', component: StudentPageComponent },
       { path: 'Book-page', component: BookPageComponent },
       { path: 'borrow-page', component: BorrowPageComponent },
-      { path: 'admin-page', component: AdminPageComponent, canActivate: [AdminGuard] }
+      { path: 'admin-page', component: AdminPageComponent, canActivate: [AdminGuard] },
+      { path: 'admin-edit', component: AdminEditComponent }
     ],
   },
   { path: 'errors', component: TestErrorsComponent },

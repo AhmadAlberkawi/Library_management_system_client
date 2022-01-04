@@ -21,6 +21,7 @@ import { TestErrorsComponent } from './errors/test-errors/test-errors.component'
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import { AdminEditComponent } from './admin-edit/admin-edit.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
     BorrowPageComponent,
     TestErrorsComponent,
     NotFoundComponent,
-    ServerErrorComponent
+    ServerErrorComponent,
+    AdminEditComponent
   ],
   imports: [
     BrowserModule,

@@ -19,9 +19,43 @@ export class AdminService {
 
   constructor(private http: HttpClient) { }
 
+  getAdmins() {
+    return this.http.get(this.baseUrl + 'admin').pipe(
+      map((Response: Array<AdminL>) => {
+        this.admins = Response;
+      })
+    );
+  }
+
+  adminRegister(model: any) {
+    return this.http.post(this.baseUrl + 'admin/addAdmin', model);
+  }
+
+  editAdmin(model: any) {
+    return this.http.put(this.baseUrl + 'admin/editAdmin', model).pipe(
+      map((response: Admin) => {
+        const admin = response;
+
+        if (admin) {
+          localStorage.setItem('admin', JSON.stringify(admin));
+          this.currentAdminSource.next(admin);
+        }
+      })
+    );
+  }
+
+  deleteAdmin(id: number) {
+    return this.http.delete(this.baseUrl + 'admin/' + id.toString());
+  }
+
+  changePassword(model: any) {
+    return this.http.put(this.baseUrl + 'admin/changePassword', model);
+  }
+
   login(model: any) {
     return this.http.post(this.baseUrl + 'admin/login', model).pipe(
-      map((response: Admin) => { const admin = response;
+      map((response: Admin) => {
+        const admin = response;
 
         if (admin) {
           localStorage.setItem('admin', JSON.stringify(admin));
@@ -38,22 +72,5 @@ export class AdminService {
   logout() {
     localStorage.removeItem('admin');
     this.currentAdminSource.next(null);
-  }
-
-  adminRegister(model: any) {
-    return this.http.post(this.baseUrl + 'admin/addAdmin', model);
-  }
-
-  getAdmins() {
-    return this.http.get(this.baseUrl + 'admin').pipe(
-      map((Response: Array<AdminL>) => {
-        this.admins = Response;
-      })
-    );
-    
-  }
-
-  deleteAdmin(id: number) {
-    return this.http.delete(this.baseUrl + 'admin/' + id.toString());
   }
 }
