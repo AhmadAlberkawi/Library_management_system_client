@@ -49,7 +49,16 @@ export class AdminService {
   }
 
   changePassword(model: any) {
-    return this.http.put(this.baseUrl + 'admin/changePassword', model);
+    return this.http.put(this.baseUrl + 'admin/changePassword', model).pipe(
+      map((response: Admin) => {
+        const admin = response;
+
+        if (admin) {
+          localStorage.setItem('admin', JSON.stringify(admin));
+          this.currentAdminSource.next(admin);
+        }
+      })
+    );
   }
 
   login(model: any) {

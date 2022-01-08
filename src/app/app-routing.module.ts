@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminChangePasswordComponent } from './admin-change-password/admin-change-password.component';
 import { AdminEditComponent } from './admin-edit/admin-edit.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { BookPageComponent } from './book-page/book-page.component';
@@ -25,7 +26,8 @@ const routes: Routes = [
       { path: 'Book-page', component: BookPageComponent },
       { path: 'borrow-page', component: BorrowPageComponent },
       { path: 'admin-page', component: AdminPageComponent, canActivate: [AdminGuard] },
-      { path: 'admin-edit', component: AdminEditComponent }
+      { path: 'admin-edit', component: AdminEditComponent },
+      { path: 'admin-change-password', component: AdminChangePasswordComponent }
     ],
   },
   { path: 'errors', component: TestErrorsComponent },

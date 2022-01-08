@@ -22,6 +22,8 @@ import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { AdminEditComponent } from './admin-edit/admin-edit.component';
+import { AdminChangePasswordComponent } from './admin-change-password/admin-change-password.component';
+import { AdminNavComponent } from './admin-nav/admin-nav.component';
 
 
 @NgModule({
@@ -40,7 +42,9 @@ import { AdminEditComponent } from './admin-edit/admin-edit.component';
     TestErrorsComponent,
     NotFoundComponent,
     ServerErrorComponent,
-    AdminEditComponent
+    AdminEditComponent,
+    AdminChangePasswordComponent,
+    AdminNavComponent
   ],
   imports: [
     BrowserModule,
