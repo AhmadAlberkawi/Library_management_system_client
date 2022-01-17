@@ -1,9 +1,11 @@
 <app-header-nav></app-header-nav>
 
-<div class="position">
-  <div class="m-5 container">
-    <table class="table table-hover">
-      <thead class="table-dark">
+<div class="position container">
+  <h4 class="titleTable">Insgesamt ausgeliehene Bücher</h4>
+
+  <div id="table-scroll">
+    <table class="table table-hover table-striped table-fixed">
+      <thead class="table-dark" id="table-wrapper">
         <tr>
           <th>#</th>
           <th>#</th>
@@ -27,13 +29,13 @@
           <td>{{borrow.title}}</td>
           <td>{{borrow.isbn}}</td>
           <td>{{borrow.verlag}}</td>
-          <td>{{borrow.autor}}</td>
-          <td>{{borrow.name}}</td>
+          <td>{{borrow.autro}}</td>
+          <td>{{borrow.studentName}}</td>
           <td>{{borrow.borrowedUntil}}</td>
-          <td>{{borrow.days}}</td>
+          <td>{{borrow.remainingDays}}</td>
         </tr>
       </tbody>
     </table>
-    <button (click)="deleteBorrow()" type="button" class="btn btn-danger mr-2">Delete</button>
   </div>
+    <button (click)="deleteBorrow()" type="button" class="btn btn-danger mr-2">Delete</button>
 </div>

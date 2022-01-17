@@ -26,7 +26,7 @@ export class BorrowService {
 
   getBorrowOneStudent(stId: number) {
     return this.http.get(this.baseUrl + stId).pipe(
-      map((Response: Array<BorrowForStudent>) => { this.borrowForStudent = Response; })
+      map((Response: Array<BorrowForStudent>) => { this.borrowForStudent = Response; return Response; })
     );
   }
 

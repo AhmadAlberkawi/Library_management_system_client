@@ -2,9 +2,37 @@
   margin-bottom: 1%;
 }
 .position {
-  margin-left: 12%;
+  margin-left: 16%;
 }
 
 .input-group-text {
   width: 2.5em;
+}
+
+#table-scroll {
+  height: 400px;
+  overflow: auto;
+  margin-bottom: 2%;
+}
+
+#table-wrapper {
+  position: sticky;
+  top: 0;
+}
+
+.table-fixed tbody td,
+.table-fixed thead > tr > th {
+  border: 0 !important;
+}
+
+.table-fixed > thead > tr > th {
+  border: 0 !important;
+}
+
+.titleTable {
+  background-color: #49C593;
+  padding: 0.5%;
+  text-align: center;
+  color: white;
+  margin-bottom: 0;
 }

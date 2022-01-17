@@ -115,7 +115,6 @@ export class StudentPageComponent implements OnInit {
       },
         error => {
           console.log(error);
-          this.toastr.error(error.error);
         });
 
       this.borrowState = false;
@@ -126,7 +125,6 @@ export class StudentPageComponent implements OnInit {
     this.borrowState = false;
     this.borrowForStudentState = false;
   }
-
 
   // books borrowed from a student
 
