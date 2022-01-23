@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 import { Borrow } from '../_models/Borrow';
 import { BorrowAdd } from '../_models/BorrowAdd';
 import { BorrowForStudent } from '../_models/BorrowForStudent';
@@ -10,7 +11,7 @@ import { BorrowForStudent } from '../_models/BorrowForStudent';
 })
 export class BorrowService {
 
-  baseUrl = 'https://localhost:5001/Bvs_Api/borrow/';
+  baseUrl = environment.apiUrl +'borrow/';
 
   borrows: Array<Borrow>;
 

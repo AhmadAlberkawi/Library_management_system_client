@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { AdminL } from '../_models/AdminL';
 import { AdminService } from '../_services/admin.service';
 
 @Component({
@@ -8,6 +9,8 @@ import { AdminService } from '../_services/admin.service';
   styleUrls: ['./admin-page.component.css']
 })
 export class AdminPageComponent implements OnInit {
+
+  admins: Array<AdminL>;
 
   registerFrom: boolean;
 
@@ -20,7 +23,9 @@ export class AdminPageComponent implements OnInit {
   }
 
   getAdmins() {
-    this.adminservice.getAdmins().subscribe(
+    this.adminservice.getAdminss().subscribe(admins => {
+      this.admins = admins;
+    },
       error => {
         console.log(error);
       }

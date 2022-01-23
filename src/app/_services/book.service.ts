@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 import { BookL } from '../_models/bookL';
 
 @Injectable({
@@ -8,7 +9,7 @@ import { BookL } from '../_models/bookL';
 })
 export class BookService {
 
-  baseUrl = 'https://localhost:5001/Bvs_Api/book/';
+  baseUrl = environment.apiUrl +'book/';
 
   books: Array<BookL>;
 

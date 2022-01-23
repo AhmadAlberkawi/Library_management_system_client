@@ -1,31 +1,42 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 import { Admin } from '../_models/admin';
 import { AdminL } from '../_models/AdminL';
+
+//const httpOptions = {
+//  headers: new HttpHeaders({
+//    Authorization: 'Bearer ' + JSON.parse(localStorage.getItem('admin'))?.token
+//  })
+//}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
 
-  baseUrl = 'https://localhost:5001/Bvs_Api/';
+  baseUrl = environment.apiUrl;
 
   private currentAdminSource = new BehaviorSubject<Admin>(null);
   currentAdmin$ = this.currentAdminSource.asObservable();
 
-  admins: Array<AdminL>;
+  //admins: Array<AdminL>;
 
   constructor(private http: HttpClient) { }
 
-  getAdmins() {
-    return this.http.get(this.baseUrl + 'admin').pipe(
-      map((Response: Array<AdminL>) => {
-        this.admins = Response;
-      })
-    );
+  getAdminss() {
+    return this.http.get<AdminL[]>(this.baseUrl + 'admin', /*httpOptions*/)
   }
+
+  //getAdmins() {
+  //  return this.http.get(this.baseUrl + 'admin', /*httpOptions*/).pipe(
+  //    map((Response: Array<AdminL>) => {
+  //      this.admins = Response;
+  //    })
+  //  );
+  //}
 
   adminRegister(model: any) {
     return this.http.post(this.baseUrl + 'admin/addAdmin', model);
@@ -45,7 +56,7 @@ export class AdminService {
   }
 
   deleteAdmin(id: number) {
-    return this.http.delete(this.baseUrl + 'admin/' + id.toString());
+    return this.http.delete(this.baseUrl + 'admin/' + id);
   }
 
   changePassword(model: any) {

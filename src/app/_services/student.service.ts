@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 import { Student } from '../_models/student';
 import { StudentL } from '../_models/StudentL';
 
@@ -10,7 +11,7 @@ import { StudentL } from '../_models/StudentL';
 })
 export class StudentService {
 
-  baseUrl = 'https://localhost:5001/Bvs_Api/Student';
+  baseUrl = environment.apiUrl +'Student';
 
   students: Array<StudentL>;
 
@@ -23,7 +24,7 @@ export class StudentService {
     );
   }
 
-  addStudent(model: any) {
+  addStudent(model: any){
     return this.http.post(this.baseUrl + '/addStudent', model);
   }
 

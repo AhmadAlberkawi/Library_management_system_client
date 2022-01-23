@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 import { Overview } from '../_models/Overview';
 
 @Injectable({
@@ -8,18 +9,11 @@ import { Overview } from '../_models/Overview';
 })
 export class OverviewService {
 
-  baseUrl = 'https://localhost:5001/Bvs_Api/Overview/';
-
-  //overview: Overview;
+  baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
   getOverview() {
-
-    return this.http.get(this.baseUrl).pipe(
-      map((overview: Overview) => {
-        return overview;
-      })
-    );
+    return this.http.get<Overview>(this.baseUrl + 'Overview/');
   }
 }

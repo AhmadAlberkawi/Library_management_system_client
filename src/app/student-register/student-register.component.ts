@@ -29,7 +29,7 @@ export class StudentRegisterComponent implements OnInit {
     }
   }
 
-  addOrEditStudent() {
+  addOrEditStudent(){      
 
     if (this.isregister) {
       this.studentservice.addStudent(this.model).subscribe(

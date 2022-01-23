@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor='let admin of this.adminservice.admins'>
+        <tr *ngFor='let admin of admins'>
           <td>
             <div class="input-group-text">
               <input [(ngModel)]="idChoice" type='radio' value='{{admin.id}}' />
