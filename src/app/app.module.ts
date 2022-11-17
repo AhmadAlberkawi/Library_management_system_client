@@ -24,6 +24,13 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { AdminEditComponent } from './admin-edit/admin-edit.component';
 import { AdminChangePasswordComponent } from './admin-change-password/admin-change-password.component';
 import { AdminNavComponent } from './admin-nav/admin-nav.component';
+import { JwtInterceptor } from './_interceptors/jwt.interceptor';
+import { BookEditComponent } from './book-edit/book-edit.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoadingInterceptor } from './_interceptors/loading.interceptor';
+import { StudentEditComponent } from './student-edit/student-edit.component';
+import { BorrowBookComponent } from './borrow-book/borrow-book.component';
+import { BorrowedBooksStudentComponent } from './borrowed-books-student/borrowed-books-student.component';
 
 
 @NgModule({
@@ -44,7 +51,11 @@ import { AdminNavComponent } from './admin-nav/admin-nav.component';
     ServerErrorComponent,
     AdminEditComponent,
     AdminChangePasswordComponent,
-    AdminNavComponent
+    AdminNavComponent,
+    BookEditComponent,
+    StudentEditComponent,
+    BorrowBookComponent,
+    BorrowedBooksStudentComponent
   ],
   imports: [
     BrowserModule,
@@ -52,10 +63,13 @@ import { AdminNavComponent } from './admin-nav/admin-nav.component';
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    NgxSpinnerModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
+import { Borrow } from '../_models/Borrow';
 import { BorrowService } from '../_services/borrow.service';
 
 @Component({
@@ -10,29 +12,20 @@ import { BorrowService } from '../_services/borrow.service';
 export class BorrowPageComponent implements OnInit {
 
   idChoice: number;
+  borrowList$: Observable<Borrow[]>;
 
   constructor(public borrowService: BorrowService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.getBorrow();
-  }
 
-  getBorrow() {
-    this.borrowService.getBorrow().subscribe(
-      Response => { console.log(this.borrowService.borrows) },
-      error => { console.log(error); }
-    );
+    this.borrowList$ = this.borrowService.getBorrow();
   }
 
   deleteBorrow() {
     if (typeof this.idChoice !== 'undefined') {
-      this.borrowService.deleteBorrow(this.idChoice).subscribe(response => {
-        console.log(response);
-        location.reload();
-      },
-        error => {
-          console.log(error);
-        });   
+      this.borrowService.deleteBorrow(this.idChoice).subscribe(() => {
+        this.toastr.success('Buch wurde erfolgreich zurückgegeben');
+      });   
     }
   }
 }

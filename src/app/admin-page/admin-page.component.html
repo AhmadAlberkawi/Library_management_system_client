@@ -1,15 +1,15 @@
 <app-header-nav></app-header-nav>
-<app-admin-register *ngIf="registerFrom" (cancelRegister)="cancelRegisterMode($event)"></app-admin-register>
-<div class="position container" *ngIf="!registerFrom">
-  <button (click)="addAdmin()" type="button" class="btn btn-success mr-2 btn-position">Admin hinzufügen</button>
+
+<div class="position container">
+  <button  routerLink='/admin-register' type="button" class="btn btn-success mr-2 btn-position">Admin hinzufügen</button>
 
   <div id="table-scroll">
 
     <table class="table table-hover table-striped table-fixed">
       <thead class="table-dark" id="table-wrapper">
         <tr>
-          <th>#</th>
-          <th>#</th>
+          <th></th>
+          <th>Bild</th>
           <th>Name</th>
           <th>Vorname</th>
           <th>Email</th>
@@ -17,10 +17,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor='let admin of admins'>
+        <tr *ngFor='let admin of admins$ | async'>
           <td>
             <div class="input-group-text">
-              <input [(ngModel)]="idChoice" type='radio' value='{{admin.id}}' />
+              <input [(ngModel)]="adminId" type='radio' value='{{admin.id}}' />
             </div>
           </td>
           <td>{{admin.foto}}</td>
@@ -32,7 +32,7 @@
       </tbody>
     </table>
   </div>
-    <button (click)="deleteAdmin()" type="button" class="btn btn-danger mr-2">Delete</button>
+    <button (click)="deleteAdmin()" type="button" class="btn btn-danger mr-2">Löschen</button>
 </div>
 
 

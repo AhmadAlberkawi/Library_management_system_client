@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Admin } from '../_models/admin';
+import { AdminEdit } from '../_models/AdminEdit';
 import { AdminService } from '../_services/admin.service';
 
 @Component({
@@ -9,20 +10,18 @@ import { AdminService } from '../_services/admin.service';
   styleUrls: ['./admin-edit.component.css']
 })
 export class AdminEditComponent implements OnInit {
+  @ViewChild('editForm') editForm: NgForm;
 
-  model: any = {};
+  model = {} as AdminEdit;
 
-  constructor(public adminService: AdminService, private toastr: ToastrService) { }
+  constructor(public adminService: AdminService, private toastr: ToastrService) {
+  }
 
   ngOnInit(): void {
-    const admin: Admin = JSON.parse(localStorage.getItem('admin'));
+    const admin: AdminEdit = JSON.parse(localStorage.getItem('admin'));
 
     if (admin) {
-      this.model.username = admin.username;
-      this.model.name = admin.name;
-      this.model.email = admin.email;
-      this.model.vorname = admin.vorname;
-      this.model.rolle = admin.rolle;
+      this.model = admin;
     }
   }
 
@@ -30,8 +29,11 @@ export class AdminEditComponent implements OnInit {
     this.adminService.editAdmin(this.model).subscribe(
       response => {
         console.log(response);
-        this.toastr.success("Erfolgreich geändert")
+        this.editForm.reset(this.model);
+        this.model.password = null;
+        this.toastr.success("Erfolgreich geändert");
       }
     )
   }
+
 }

@@ -1,0 +1,17 @@
+.container {
+  margin-left: 33%;
+  margin-bottom: 3%;
+  width: 40%
+}
+
+.row {
+  margin-top: 2%;
+  background-color: #49C593;
+}
+
+.alert{
+    width:150%;
+    margin-top:-20%;
+    margin-bottom:5%;
+}
+

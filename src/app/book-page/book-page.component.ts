@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 import { BookL } from '../_models/bookL';
 import { BookService } from '../_services/book.service';
 
@@ -10,15 +12,16 @@ import { BookService } from '../_services/book.service';
 })
 export class BookPageComponent implements OnInit {
 
-  idChoice: number;
-  registerForm: boolean;
-  isregisterValue: boolean;
-  book: BookL;
+  bookId: number;
+  booklist$: Observable<BookL[]>;
 
-  constructor(private bookService: BookService, private toastr: ToastrService) { }
+  constructor(public bookService: BookService, private toastr: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
-    this.getBooks();
+
+    this.booklist$ = this.bookService.getBooks();
+
+    //this.getBooks();
   }
 
   getBooks() {
@@ -27,28 +30,19 @@ export class BookPageComponent implements OnInit {
     );
   }
 
-  addBookBtn() {
-    this.registerForm = true;
-    this.isregisterValue = true;
-  }
-
   editBookBtn() {
-    if (typeof this.idChoice !== 'undefined') {
-      this.book = this.bookService.books.find(x => x.id == this.idChoice);
-      this.registerForm = true;
-      this.isregisterValue = false;
+    if (typeof this.bookId !== 'undefined') {
+      this.router.navigateByUrl('/book-edit/' + this.bookId);
     }
   }
 
   deleteBook() {
-    this.bookService.deleteBook(this.idChoice).subscribe(response => {
-      console.log(response);
-      location.reload();
-    });
-  }
 
-  cancelRegisterMode(event: boolean) {
-    this.registerForm = event;
-    location.reload();
+    if (typeof this.bookId !== 'undefined') {
+      this.bookService.deleteBook(this.bookId).subscribe(response => {
+        console.log(response);
+      });
+    }
   }
+  
 }

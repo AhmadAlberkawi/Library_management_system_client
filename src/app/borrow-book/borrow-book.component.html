@@ -1,13 +1,9 @@
 <app-header-nav></app-header-nav>
 
-<!--<app-book-register [bookForEdit]="bookId" (cancelRegister)="cancelRegisterMode($event)"
-                   [isregister]="isregisterValue"
-                   *ngIf="registerForm"></app-book-register>-->
+<div class="container">
+  <h4 class="titleTable">Zum Ausleihen wählen Sie bitte ein Buch aus</h4>
 
-<div class="position container">
-  <button routerLink="/book-register" type="button" class="btn btn-success mr-2 btn-position">Buch hinzufügen</button>
   <div id="table-scroll">
-
     <table class="table table-hover table-striped table-fixed">
       <thead class="table-dark" id="table-wrapper">
         <tr>
@@ -23,10 +19,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor='let book of booklist$ | async'>
+        <tr *ngFor='let book of bookList$ | async'>
           <td>
             <div class="input-group-text">
-              <input [(ngModel)]="bookId" type='radio' value='{{book.id}}' />
+              <input [(ngModel)]="bkIdChoice" type='radio' value='{{book.id}}' />
             </div>
           </td>
           <td>{{book.foto}}</td>
@@ -41,11 +37,6 @@
       </tbody>
     </table>
   </div>
-  <button (click)="editBookBtn()" type="button" class="btn btn-primary mr-2">Bearbeiten</button>
-  <button (click)="deleteBook()" type="button" class="btn btn-danger mr-2">Löschen</button>
+  <button (click)="borrow()" type="button" class="btn btn-primary mr-2">Ausleihe</button>
+  <button routerLink="/student-page" type="button" class="btn btn-danger mr-2">Abrechen</button>
 </div>
-
-
-
-
-

@@ -1,34 +1,39 @@
 <app-header-nav></app-header-nav>
 
-<div class="row nav-link" *ngIf="(adminService.currentAdmin$ | async) as admin"
-     style="margin-top:2%;  background-color: #49C593">
+<div class="row nav-link" *ngIf="(adminService.currentAdmin$ | async) as admin">
 
   <app-admin-nav></app-admin-nav>
 
-    <form class="container" autocomplete="off" (ngSubmit)="editAdmin()"
-          style="margin-left:33%;margin-bottom:3%;width:40%">
+  <form class="container" #editForm="ngForm" autocomplete="off" (ngSubmit)="editAdmin()">
 
-      <div class="form-group">
-        <input type="text" class="form-control" name="username"
-               [(ngModel)]="model.username" placeholder="Benutzername">
+    <div class="col-8">
+      <div class="alert alert-info" *ngIf="editForm.dirty">
+        <strong>Information:</strong>
+        Sie haben änderungen vorgenommen, Alle nicht gespeicherten Änderungen gehen verloren.
       </div>
-      <div class="form-group">
-        <input type="text" class="form-control" name="name"
-               [(ngModel)]="model.name" placeholder="Name">
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" name="vorname"
-               [(ngModel)]="model.vorname" placeholder="Vorname">
-      </div>
-      <div class="form-group">
-        <input type="password" class="form-control" name="password"
-               [(ngModel)]="model.password" placeholder="Passwort">
-      </div>
-      <div class="form-group text-center">
-        <button class="btn btn-success mr-2" type="submit">Änderung speichern</button>
-      </div>
+    </div>
 
-    </form>
+    <div class="form-group">
+      <input type="text" class="form-control" name="username"
+             [(ngModel)]="model.username" placeholder="Benutzername">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" name="name"
+             [(ngModel)]="model.name" placeholder="Name">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" name="vorname"
+             [(ngModel)]="model.vorname" placeholder="Vorname">
+    </div>
+    <div class="form-group">
+      <input type="password" class="form-control" name="password"
+             [(ngModel)]="model.password" placeholder="Passwort">
+    </div>
+    <div class="form-group text-center">
+      <button [disabled]="!editForm.dirty" class="btn btn-success mr-2" type="submit">Änderung speichern</button>
+    </div>
+
+  </form>
 </div>
 
 

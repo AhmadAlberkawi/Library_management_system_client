@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BookL } from '../_models/bookL';
 import { BookService } from '../_services/book.service';
@@ -10,46 +11,21 @@ import { BookService } from '../_services/book.service';
 })
 export class BookRegisterComponent implements OnInit {
 
-  @Output() cancelRegister = new EventEmitter(); 
-  @Input() bookForEdit: BookL;
-  @Input() isregister: boolean;
-  model: any = {};
+  model = {} as BookL;
 
-  constructor(private bookService: BookService, private toastr: ToastrService) { }
+  constructor(private bookService: BookService,
+    private toastr: ToastrService, private router: Router) { }
 
   ngOnInit(): void {
-    if (!this.isregister) {
-      this.model.id = this.bookForEdit.id;
-      this.model.title = this.bookForEdit.title;
-      this.model.isbn = this.bookForEdit.isbn;
-      this.model.verlag = this.bookForEdit.verlag;
-      this.model.verfuegbar = this.bookForEdit.verfuegbar;
-      this.model.anzahl = this.bookForEdit.anzahl;
-      this.model.autor = this.bookForEdit.autor;
-      this.model.kategorie = this.bookForEdit.kategorie;
-    }
   }
 
-  addOrEditBook() {
-    if (this.isregister) {
-      this.bookService.addBook(this.model).subscribe(response => {
-        console.log(response);
+  addBook() {
 
-        this.cancelRegister.emit(false);
-        location.reload();
-      });
-    }
-    else {
-      this.bookService.editBook(this.model).subscribe(response => {
-        console.log(response);
+    this.bookService.addBook(this.model).subscribe(response => {
+      console.log(response);
 
-        this.cancelRegister.emit(false);
-        location.reload();
-      });
-    }
-  }
-
-  cancel() {
-    this.cancelRegister.emit(false);
+      this.router.navigateByUrl('/Book-page')
+      this.toastr.success('Buch wurde regestriert');
+    });
   }
 }

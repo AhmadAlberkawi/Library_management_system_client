@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { Overview } from '../_models/Overview';
 import { OverviewService } from '../_services/overview.service';
 
 @Component({
@@ -8,29 +11,15 @@ import { OverviewService } from '../_services/overview.service';
 })
 export class OverviewPageComponent implements OnInit {
 
-  students: number;
-  books: number;
-  borrows: number;
-  admins: number;
+  overView = {} as Overview;
+  overView$: Observable<Overview>;
 
   constructor(private overviewService: OverviewService) { }
 
   ngOnInit(): void {
-    this.getOverview();
-  }
 
-  getOverview() {
-    this.overviewService.getOverview().subscribe(
-      overview => {
-        if (overview) {
-          this.students = overview.anzahlStudent;
-          this.books = overview.anzahlBook;
-          this.borrows = overview.anzahlBorrow;
-          this.admins = overview.anzahlAdmin;
-        }
-      },
-      error => { console.log(error); }
-    );
+    this.overView$ = this.overviewService.getOverview();
+    this.overView$.pipe(take(1)).subscribe(overView => this.overView = overView);
   }
 
 }

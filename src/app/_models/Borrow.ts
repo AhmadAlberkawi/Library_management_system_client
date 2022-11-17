@@ -4,8 +4,8 @@ export interface Borrow {
   title: string;
   isbn: string;
   verlag: string;
-  autor: string;
+  autro: string;
   name: string;
   borrowedUntil: string;
-  days: number;
+  remainingDays: number;
 }

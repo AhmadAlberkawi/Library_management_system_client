@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 import { AdminL } from '../_models/AdminL';
 import { AdminService } from '../_services/admin.service';
 
@@ -10,45 +12,30 @@ import { AdminService } from '../_services/admin.service';
 })
 export class AdminPageComponent implements OnInit {
 
-  admins: Array<AdminL>;
+  admins$: Observable<AdminL[]>;
 
-  registerFrom: boolean;
-
-  idChoice: number;
+  adminId: number;
 
   constructor(public adminservice: AdminService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.getAdmins();
+    this.admins$ = this.adminservice.getAdmins();
   }
 
-  getAdmins() {
-    this.adminservice.getAdminss().subscribe(admins => {
-      this.admins = admins;
-    },
-      error => {
-        console.log(error);
-      }
-    );
-  }
+  //getAdmins() {
+  //  this.adminservice.getAdmins().subscribe(admins => {
+  //    this.admins = admins;
+  //  });
+  //}
 
   deleteAdmin() {
-    this.adminservice.deleteAdmin(this.idChoice).subscribe(response => {
-      console.log(response);
-    },
-      error => {
-        console.log(error);
-        this.toastr.error(error.error);
+
+    if (typeof this.adminId !== 'undefined') {
+      this.adminservice.deleteAdmin(this.adminId).subscribe(response => {
+        this.toastr.success('Admin wurde erfolgreich gelöscht');
+        console.log(response);
       });
-    location.reload();
+    }
   }
-
-  addAdmin() {
-    this.registerFrom = true;
-  }
-
-  cancelRegisterMode(event: boolean) {
-    this.registerFrom = event;
-  }
-
+   
 }

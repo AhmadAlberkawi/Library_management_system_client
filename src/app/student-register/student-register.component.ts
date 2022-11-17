@@ -11,47 +11,26 @@ import { StudentService } from '../_services/student.service';
 })
 export class StudentRegisterComponent implements OnInit {
 
+  /*
   @Input() studentfromList: StudentL;
   @Input() isregister: boolean;
   @Output() cancelRegister = new EventEmitter();
-  model: any = {};
+  */
+
+  model = {} as StudentL;
 
   constructor(public studentservice: StudentService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    if (!this.isregister) {
-      this.model.id = this.studentfromList.id;
-      this.model.name = this.studentfromList.name;
-      this.model.vorname = this.studentfromList.vorname;
-      this.model.email = this.studentfromList.email;
-      this.model.matrikelNum = this.studentfromList.matrikelNum;
-      this.model.bibNum = this.studentfromList.bibNum;
-    }
   }
 
-  addOrEditStudent(){      
+  addStudent() {
 
-    if (this.isregister) {
-      this.studentservice.addStudent(this.model).subscribe(
-        response => {
-          console.log(response);
-
-          this.cancelRegister.emit(false);
-          location.reload();
-        });
-    }
-    else {
-      this.studentservice.editStudent(this.model).subscribe(
-        response => {
-          console.log(response);
-
-          this.cancelRegister.emit(false);
-          location.reload();
-        });
-    }
-  }
-
-  cancel() {
-    this.cancelRegister.emit(false);
+    this.studentservice.addStudent(this.model).subscribe(
+      () => {
+        this.router.navigateByUrl('/student-page');
+        this.toastr.success('Student wurde erfolgreich hinzugefügt');
+      }
+    );
   }
 }

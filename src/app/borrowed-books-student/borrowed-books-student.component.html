@@ -1,7 +1,7 @@
 <app-header-nav></app-header-nav>
 
-<div class="position container">
-  <h4 class="titleTable">Insgesamt ausgeliehene Bücher</h4>
+<div class="container">
+  <h4 class="titleTable">Zum zurückgeben wählen Sie bitte ein Buch aus</h4>
 
   <div id="table-scroll">
     <table class="table table-hover table-striped table-fixed">
@@ -10,19 +10,18 @@
           <th>#</th>
           <th>#</th>
           <th>Title</th>
-          <th>ISBN</th>
+          <th>Isbn</th>
           <th>Verlag</th>
           <th>Autor</th>
-          <th>Ausgeliehen Von</th>
           <th>Ausgeliehen Bis</th>
           <th>Übrige Tage</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor='let borrow of this.borrowList$ | async'>
+        <tr *ngFor='let borrow of borrowforStudentL$ | async'>
           <td>
             <div class="input-group-text">
-              <input [(ngModel)]="idChoice" type='radio' value='{{borrow.id}}' />
+              <input [(ngModel)]="borrowIdChoice" type='radio' value='{{borrow.id}}' />
             </div>
           </td>
           <td>{{borrow.foto}}</td>
@@ -30,12 +29,12 @@
           <td>{{borrow.isbn}}</td>
           <td>{{borrow.verlag}}</td>
           <td>{{borrow.autro}}</td>
-          <td>{{borrow.studentName}}</td>
           <td>{{borrow.borrowedUntil}}</td>
           <td>{{borrow.remainingDays}}</td>
         </tr>
       </tbody>
     </table>
   </div>
-    <button (click)="deleteBorrow()" type="button" class="btn btn-danger mr-2">Löschen</button>
+  <button (click)="deleteBorrow()" type="button" class="btn btn-primary mr-2">Zurückgeben</button>
+  <button routerLink="/student-page" type="button" class="btn btn-danger mr-2">Abrechen</button>
 </div>

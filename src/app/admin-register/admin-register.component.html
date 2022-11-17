@@ -1,4 +1,14 @@
+<app-header-nav></app-header-nav>
+
+<div class="col-8">
+  <div class="alert alert-info" *ngIf="registerForm.dirty">
+    <strong>Information:</strong>
+    Sie haben änderungen vorgenommen, Alle nicht gespeicherten Änderungen gehen verloren.
+  </div>
+</div>
+
 <form class="container" #registerForm="ngForm" (ngSubmit)="adminRegister()" autocomplete="off">
+
   <h2 class="text-center text-primary">Regestrieren</h2>
   <hr>
   <div class="form-group">
@@ -29,11 +39,11 @@
   </div>
   <div class="form-group">
     <input type="password" class="form-control" name="confirmPassword"
-            [(ngModel)]="model.confirmPassword"  placeholder="Passwort bestätigen">
+           [(ngModel)]="model.confirmPassword" placeholder="Passwort bestätigen">
   </div>
   <div class="form-group text-center">
-    <button class="btn btn-success mr-2" type="submit">Regestrieren</button>
-    <button class="btn btn-danger mr-2" type="button" (click)="cancel()">Abbrechen</button>
+    <button [disabled]="!registerForm.dirty" class="btn btn-success mr-2" type="submit">Regestrieren</button>
+    <button class="btn btn-danger mr-2" type="button" routerLink='/admin-page'>Abbrechen</button>
   </div>
 
 </form>

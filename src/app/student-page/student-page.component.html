@@ -1,134 +1,129 @@
 <app-header-nav></app-header-nav>
 
-<app-student-register [studentfromList]="student" (cancelRegister)="cancelRegisterMode($event)"
+<!--<app-student-register [studentfromList]="student" (cancelRegister)="cancelRegisterMode($event)"
                       [isregister]="register"
-                      *ngIf="registerFrom"></app-student-register>
+                      *ngIf="registerFrom"></app-student-register>-->
 
 <div class="position container">
 
-  <div *ngIf="!registerFrom && !borrowState && !borrowForStudentState">
+  <button routerLink="/student-register"
+          type="button" class="btn btn-success mr-2
+          btn-position">Student hinzufügen
+  </button>
 
-    <button (click)="addStudent()" type="button" class="btn btn-success mr-2 btn-position">Student hinzufügen</button>
-
-    <div id="table-scroll">
-      <table class="table table-hover table-striped table-fixed">
-        <thead class="table-dark" id="table-wrapper">
-          <tr>
-            <th>#</th>
-            <th>#</th>
-            <th>Name</th>
-            <th>Vorname</th>
-            <th>Email</th>
-            <th>Matrikelnummer</th>
-            <th>Bibliotheknummer</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor='let student of this.studentservice.students'>
-            <td>
-              <div class="input-group-text">
-                <input [(ngModel)]="idChoice" type='radio' value='{{student.id}}' />
-              </div>
-            </td>
-            <td>{{student.foto}}</td>
-            <td>{{student.name}}</td>
-            <td>{{student.vorname}}</td>
-            <td>{{student.email}}</td>
-            <td>{{student.matrikelNum}}</td>
-            <td>{{student.bibNum}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <button (click)="editStudent()" type="button" class="btn btn-primary mr-2">Edit</button>
-    <button (click)="deleteStudent()" type="button" class="btn btn-danger mr-2">Delete</button>
-    <button (click)="borrowBook()" type="button" class="btn btn-secondary mr-2">Buch ausleihen</button>
-    <button (click)="showBooks()" type="button" class="btn btn-info mr-2">Bücher anzeigen</button>
+  <div id="table-scroll">
+    <table class="table table-hover table-striped table-fixed">
+      <thead class="table-dark" id="table-wrapper">
+        <tr>
+          <th>#</th>
+          <th>#</th>
+          <th>Name</th>
+          <th>Vorname</th>
+          <th>Email</th>
+          <th>Matrikelnummer</th>
+          <th>Bibliotheknummer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let student of students$ | async'>
+          <td>
+            <div class="input-group-text">
+              <input [(ngModel)]="idChoice" type='radio' value='{{student.id}}' />
+            </div>
+          </td>
+          <td>{{student.foto}}</td>
+          <td>{{student.name}}</td>
+          <td>{{student.vorname}}</td>
+          <td>{{student.email}}</td>
+          <td>{{student.matrikelNum}}</td>
+          <td>{{student.bibNum}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+  <button (click)="editStudent()" type="button" class="btn btn-primary mr-2">Bearbeiten</button>
+  <button (click)="deleteStudent()" type="button" class="btn btn-danger mr-2">Löschen</button>
+  <button (click)="borrowBook()" type="button" class="btn btn-secondary mr-2">Buch ausleihen</button>
+  <button (click)="showBooks()" type="button" class="btn btn-info mr-2">Bücher anzeigen</button>
+</div>
 
-  <div *ngIf="borrowState">
-    <h4 class="titleTable">Zum Ausleihen wählen Sie bitte ein Buch aus</h4>
+<!--<div *ngIf="borrowState">
+  <h4 class="titleTable">Zum Ausleihen wählen Sie bitte ein Buch aus</h4>
 
-    <div id="table-scroll">
-      <table class="table table-hover table-striped table-fixed">
-        <thead class="table-dark" id="table-wrapper">
-          <tr>
-            <th>#</th>
-            <th>#</th>
-            <th>Title</th>
-            <th>Isbn</th>
-            <th>Verlag</th>
-            <th>Verfügbar</th>
-            <th>Anzahl</th>
-            <th>Autor</th>
-            <th>Kategorie</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor='let book of this.bookService.books'>
-            <td>
-              <div class="input-group-text">
-                <input [(ngModel)]="bkIdChoice" type='radio' value='{{book.id}}' />
-              </div>
-            </td>
-            <td>{{book.foto}}</td>
-            <td>{{book.title}}</td>
-            <td>{{book.isbn}}</td>
-            <td>{{book.verlag}}</td>
-            <td>{{book.verfuegbar}}</td>
-            <td>{{book.anzahl}}</td>
-            <td>{{book.autor}}</td>
-            <td>{{book.kategorie}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <button (click)="borrow()" type="button" class="btn btn-primary mr-2">Ausleihe</button>
-    <button (click)="cancel()" type="button" class="btn btn-danger mr-2">Abrechen</button>
+  <div id="table-scroll">
+    <table class="table table-hover table-striped table-fixed">
+      <thead class="table-dark" id="table-wrapper">
+        <tr>
+          <th>#</th>
+          <th>#</th>
+          <th>Title</th>
+          <th>Isbn</th>
+          <th>Verlag</th>
+          <th>Verfügbar</th>
+          <th>Anzahl</th>
+          <th>Autor</th>
+          <th>Kategorie</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let book of this.bookService.books'>
+          <td>
+            <div class="input-group-text">
+              <input [(ngModel)]="bkIdChoice" type='radio' value='{{book.id}}' />
+            </div>
+          </td>
+          <td>{{book.foto}}</td>
+          <td>{{book.title}}</td>
+          <td>{{book.isbn}}</td>
+          <td>{{book.verlag}}</td>
+          <td>{{book.verfuegbar}}</td>
+          <td>{{book.anzahl}}</td>
+          <td>{{book.autor}}</td>
+          <td>{{book.kategorie}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-
-
-  <div *ngIf="borrowForStudentState">
-    <h4 class="titleTable">Zum zurückgeben wählen Sie bitte ein Buch aus</h4>
-
-    <div id="table-scroll">
-      <table class="table table-hover table-striped table-fixed">
-        <thead class="table-dark" id="table-wrapper">
-          <tr>
-            <th>#</th>
-            <th>#</th>
-            <th>Title</th>
-            <th>Isbn</th>
-            <th>Verlag</th>
-            <th>Autor</th>
-            <th>Ausgeliehen Bis</th>
-            <th>Übrige Tage</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor='let borrow of this.borrowService.borrowForStudent'>
-            <td>
-              <div class="input-group-text">
-                <input [(ngModel)]="borrowIdChoice" type='radio' value='{{borrow.id}}' />
-              </div>
-            </td>
-            <td>{{borrow.foto}}</td>
-            <td>{{borrow.title}}</td>
-            <td>{{borrow.isbn}}</td>
-            <td>{{borrow.verlag}}</td>
-            <td>{{borrow.autro}}</td>
-            <td>{{borrow.borrowedUntil}}</td>
-            <td>{{borrow.remainingDays}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <button (click)="deleteBorrow()" type="button" class="btn btn-primary mr-2">Zurückgeben</button>
-    <button (click)="cancel()" type="button" class="btn btn-danger mr-2">Abrechen</button>
-  </div>
-
+  <button (click)="borrow()" type="button" class="btn btn-primary mr-2">Ausleihe</button>
+  <button (click)="cancel()" type="button" class="btn btn-danger mr-2">Abrechen</button>
 </div>
 
 
+<div *ngIf="borrowForStudentState">
+  <h4 class="titleTable">Zum zurückgeben wählen Sie bitte ein Buch aus</h4>
 
-
+  <div id="table-scroll">
+    <table class="table table-hover table-striped table-fixed">
+      <thead class="table-dark" id="table-wrapper">
+        <tr>
+          <th>#</th>
+          <th>#</th>
+          <th>Title</th>
+          <th>Isbn</th>
+          <th>Verlag</th>
+          <th>Autor</th>
+          <th>Ausgeliehen Bis</th>
+          <th>Übrige Tage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let borrow of this.borrowService.borrowForStudent'>
+          <td>
+            <div class="input-group-text">
+              <input [(ngModel)]="borrowIdChoice" type='radio' value='{{borrow.id}}' />
+            </div>
+          </td>
+          <td>{{borrow.foto}}</td>
+          <td>{{borrow.title}}</td>
+          <td>{{borrow.isbn}}</td>
+          <td>{{borrow.verlag}}</td>
+          <td>{{borrow.autro}}</td>
+          <td>{{borrow.borrowedUntil}}</td>
+          <td>{{borrow.remainingDays}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <button (click)="deleteBorrow()" type="button" class="btn btn-primary mr-2">Zurückgeben</button>
+  <button (click)="cancel()" type="button" class="btn btn-danger mr-2">Abrechen</button>
+</div>-->

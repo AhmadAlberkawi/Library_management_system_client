@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Admin } from '../_models/admin';
 import { AdminService } from '../_services/admin.service';
+import { OverviewService } from '../_services/overview.service';
 
 @Component({
   selector: 'app-home-page',
@@ -13,7 +14,7 @@ export class HomePageComponent implements OnInit {
 
   model: any = {};
 
-  constructor(public adminservice: AdminService, private router: Router, private toastr: ToastrService) { }
+  constructor(public adminservice: AdminService, private router: Router, private overView: OverviewService) { }
 
   ngOnInit(): void {
     this.setCurrentAdmin();
@@ -30,6 +31,8 @@ export class HomePageComponent implements OnInit {
   login() {
     this.adminservice.login(this.model).subscribe(response => {
       console.log(response);
+
+      this.overView.getOverview().subscribe();
       this.router.navigateByUrl('/overview');
     });
   }

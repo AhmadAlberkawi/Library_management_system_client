@@ -1,10 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, of, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { Admin } from '../_models/admin';
+import { AdminEdit } from '../_models/AdminEdit';
 import { AdminL } from '../_models/AdminL';
+import { OverviewService } from './overview.service';
 
 //const httpOptions = {
 //  headers: new HttpHeaders({
@@ -22,12 +24,18 @@ export class AdminService {
   private currentAdminSource = new BehaviorSubject<Admin>(null);
   currentAdmin$ = this.currentAdminSource.asObservable();
 
-  //admins: Array<AdminL>;
+  admins: AdminL[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private overviewService: OverviewService) { }
 
-  getAdminss() {
-    return this.http.get<AdminL[]>(this.baseUrl + 'admin', /*httpOptions*/)
+  getAdmins() {
+    if (this.admins.length > 0) return of(this.admins);
+    return this.http.get<AdminL[]>(this.baseUrl + 'admin').pipe(
+      map(admins => {
+        this.admins = admins;
+        return admins;
+      })
+    );
   }
 
   //getAdmins() {
@@ -39,13 +47,36 @@ export class AdminService {
   //}
 
   adminRegister(model: any) {
-    return this.http.post(this.baseUrl + 'admin/addAdmin', model);
+    return this.http.post(this.baseUrl + 'admin/addAdmin', model).pipe(
+      map((admin: AdminL) => {
+        this.admins.push(admin);
+
+        if (this.overviewService.overView) {
+          this.overviewService.overView.anzahlAdmin++;
+        }
+      })
+    );
   }
 
-  editAdmin(model: any) {
+  editAdmin(model: AdminEdit) {
+
     return this.http.put(this.baseUrl + 'admin/editAdmin', model).pipe(
       map((response: Admin) => {
-        const admin = response;
+
+        const admin = response;      
+        const id = (this.admins.find(x => x.email === admin.email)).id;
+
+        const adminL: AdminL = {
+          id: id,
+          name: admin.name,
+          vorname: admin.vorname,
+          email: admin.email,
+          rolle: admin.rolle,
+          foto: admin.foto
+        };
+
+        const index = this.admins.findIndex(x => x.email === admin.email);
+        this.admins[index] = adminL;
 
         if (admin) {
           localStorage.setItem('admin', JSON.stringify(admin));
@@ -56,7 +87,16 @@ export class AdminService {
   }
 
   deleteAdmin(id: number) {
-    return this.http.delete(this.baseUrl + 'admin/' + id);
+    return this.http.delete(this.baseUrl + 'admin/' + id).pipe(
+      map(() => {
+        const index = this.admins.findIndex(x => x.id == id);
+        this.admins.splice(index, 1);
+
+        if (this.overviewService.overView) {
+          this.overviewService.overView.anzahlAdmin--;
+        }
+      })
+    );
   }
 
   changePassword(model: any) {
